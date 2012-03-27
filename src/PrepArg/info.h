@@ -12,6 +12,11 @@
     PREPARG_DISP_B( PREPARG_GET_SET_PREFIX VAR ); \
     PREPARG_DISP_S( "\n" );
 
+#define EARG( VAR, HELP ) \
+    PREPARG_DISP_S( #VAR " -> " ); \
+    PREPARG_DISP_B( PREPARG_GET_SET_PREFIX VAR ); \
+    PREPARG_DISP_S( "\n" );
+
 #define DESCRIPTION( TXT )
 
 // code

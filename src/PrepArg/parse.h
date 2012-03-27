@@ -26,6 +26,7 @@ for( int _preparg_num_arg = 1; _preparg_num_arg < PREPARG_ARGC; ++_preparg_num_a
                     PREPARG_SET_B( VAR ); \
                     continue; \
                 }
+            #define EARG( VAR, HELP )
             #define DESCRIPTION( TXT )
             #include PREPARG_FILE
             #include "undefs.h"
@@ -46,6 +47,7 @@ for( int _preparg_num_arg = 1; _preparg_num_arg < PREPARG_ARGC; ++_preparg_num_a
                     has_flag = true; \
                     continue; \
                 }
+            #define EARG( VAR, HELP )
             #define DESCRIPTION( TXT )
             #include PREPARG_FILE
             #include "undefs.h"
@@ -74,6 +76,7 @@ for( int _preparg_num_arg = 1; _preparg_num_arg < PREPARG_ARGC; ++_preparg_num_a
                 continue; \
             }
         #define BARG( SHORT, VAR, HELP, DEFAULT_VALUE )
+        #define EARG( VAR, HELP )
         #define DESCRIPTION( TXT )
         #include PREPARG_FILE
         #include "undefs.h"
@@ -83,5 +86,13 @@ for( int _preparg_num_arg = 1; _preparg_num_arg < PREPARG_ARGC; ++_preparg_num_a
             return 0;
         }
     }
+
+    // else -> ending argument
+    #define SARG( SHORT, VAR, HELP, DEFAULT_VALUE )
+    #define BARG( SHORT, VAR, HELP, DEFAULT_VALUE )
+    #define EARG( VAR, HELP ) PREPARG_SET_I( VAR, _preparg_num_arg ); break
+    #define DESCRIPTION( TXT )
+    #include PREPARG_FILE
+    #include "undefs.h"
 }
 

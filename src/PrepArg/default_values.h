@@ -22,12 +22,20 @@
 #define PREPARG_B( A ) bool A
 #endif
 
+#ifndef PREPARG_I
+#define PREPARG_I( A ) int A
+#endif
+
 #ifndef PREPARG_S_D
 #define PREPARG_S_D( A, DEFAULT_VALUE ) PREPARG_S( A ) = DEFAULT_VALUE
 #endif
 
 #ifndef PREPARG_B_D
 #define PREPARG_B_D( A, DEFAULT_VALUE ) PREPARG_B( A ) = DEFAULT_VALUE
+#endif
+
+#ifndef PREPARG_I_D
+#define PREPARG_I_D( A, DEFAULT_VALUE ) PREPARG_I( A ) = DEFAULT_VALUE
 #endif
 
 #ifndef PREPARG_ARGC
@@ -48,6 +56,10 @@
 
 #ifndef PREPARG_SET_B
 #define PREPARG_SET_B( VAR ) PREPARG_GET_SET_PREFIX VAR = 1;
+#endif
+
+#ifndef PREPARG_SET_I
+#define PREPARG_SET_I( VAR, VAL ) PREPARG_GET_SET_PREFIX VAR = VAL;
 #endif
 
 #ifndef PREPARG_STREQ_U2M

@@ -27,7 +27,7 @@ BARG( 'b', my_boolean, "A boolean", false );
 
 `BARG` means boolean argument (a flag).
 
-Arguments of `SARG`, `BARG`, ... are:
+Arguments of `SARG()`, `BARG()`, ... are:
 
 * char for single letter options (-s, -b, ...). as specified by the gnu conventions, multiple options (specified with the single char versions) may follow a hyphen delimiter in a single token if the options do not take arguments. Thus, ‘-abc’ is equivalent to ‘-a -b -c’.
 * variable name. This value is also used for long options, but '_' are replace by '-'. In this example, PrepArg will look for '--my-string' and '--my-boolean'
