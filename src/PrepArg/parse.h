@@ -26,24 +26,33 @@ for( int _preparg_num_arg = 1; _preparg_num_arg < PREPARG_ARGC; ++_preparg_num_a
                     PREPARG_SET_B( VAR ); \
                     continue; \
                 }
-            #define DESCRIPTION
+            #define DESCRIPTION( TXT )
             #include PREPARG_FILE
             #include "undefs.h"
+
+            if ( PREPARG_STREQ_U2M( _preparg_arg + 2, "help" ) ) {
+                PREPARG_USAGE( PREPARG_PRG_NAME );
+                return 0;
+            }
         }
 
         // Try flags
+        bool has_flag = false;
         for( int _preparg_num_ch = 1; ; ++_preparg_num_ch ) {
             #define SARG( SHORT, VAR, HELP, DEFAULT_VALUE )
             #define BARG( SHORT, VAR, HELP, DEFAULT_VALUE ) \
                 if ( SHORT and _preparg_arg[ _preparg_num_ch ] == SHORT ) { \
                     PREPARG_SET_B( VAR ); \
+                    has_flag = true; \
                     continue; \
                 }
-            #define DESCRIPTION
+            #define DESCRIPTION( TXT )
             #include PREPARG_FILE
             #include "undefs.h"
             break;
         }
+        if ( has_flag )
+            continue;
 
         // arguments that cannot be concatened
         #define SARG( SHORT, VAR, HELP, DEFAULT_VALUE ) \
@@ -65,9 +74,14 @@ for( int _preparg_num_arg = 1; _preparg_num_arg < PREPARG_ARGC; ++_preparg_num_a
                 continue; \
             }
         #define BARG( SHORT, VAR, HELP, DEFAULT_VALUE )
-        #define DESCRIPTION
+        #define DESCRIPTION( TXT )
         #include PREPARG_FILE
         #include "undefs.h"
+
+        if ( _preparg_arg[ 1 ] == 'h' ) {
+            PREPARG_USAGE( PREPARG_PRG_NAME );
+            return 0;
+        }
     }
 }
 
