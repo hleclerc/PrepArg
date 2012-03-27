@@ -68,7 +68,7 @@ int main( int argc, char **argv ) {
 
 # Configuration
 
-Configuration may be done using `#define`. Main options are defined in [src/PrepArg/default_values.h](blob/master/src/PrepArg/default_values.h).
+Configuration may be done using `#define`. Main options are defined in [src/PrepArg/default_values.h](tree/master/src/PrepArg/default_values.h).
 
 For example, if `const char *` is to be replaced by `std::string`, one can write something like
 
@@ -81,7 +81,7 @@ int main( int argc, char **argv ) {
 }
 ```
 
-Some configurations issues can also be managed using specific `.h` files, as e.g. in [test_class.cpp](blob/master/tests/test_class.cpp) which illustrates how to store the variables as class attributes.
+Some configurations issues can also be managed using specific `.h` files, as e.g. in [test_class.cpp](tree/master/tests/test_class.cpp) which illustrates how to store the variables as class attributes.
 
 
 # And now ?
