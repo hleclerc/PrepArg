@@ -1,12 +1,13 @@
 # What is PrepArg ?
 
-PrepArg is a simple and *agnostic* argument parser for C and C++, based primarily on preprocessor directive. Thus:
-* it does not allocate/free any dynamic memory;
-* it not does depend on any specific library;
-* input informations are not repeated;
-* it is configurable in many ways.
+PrepArg is a simple and *agnostic* argument parser for C and C++, based primarily on preprocessor directives. Thus:
+* it does not allocate any dynamic memory;
+* it does not depend on any specific library;
+* it is highly configurable.
 
-It follows the [GNU conventions](http://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html)
+It follows the [GNU conventions](http://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html).
+
+Following the DRY (Don't Repeat Yourself) principles, things are specified once (as much as possible).
 
 # A simple example
 
@@ -50,13 +51,16 @@ int main( int argc, char **argv ) {
 
     // helper that will display the arguments names, and their values
     #include <PrepArg/info.h>
+
+    // obviously, results can be used directly
+    int foo = 2 * my_boolean;
 }
 ```
 
 
 # Configuration
 
-Configuration may be done using `#define`. Main options are defined in [src/PrepArg/default_values.h].
+Configuration may be done using `#define` and main options are defined in [src/PrepArg/default_values.h].
 
 For example, if `const char *` is to be replaced by `std::string`, one can write something like
 
@@ -69,3 +73,11 @@ int main( int argc, char **argv ) {
 }
 ```
 
+By the way, some configurations issues can also be treated using specific `.h` files, as e.g. in [tests/test_class.cpp] which illustrates how to store the variables as class attributes.
+
+
+# And now ?
+
+This code is under the LGPLv3 license.
+
+Feel free to use it and... if you want to add some new types (`xARG`) or new functionnalities, you are very welcome !
