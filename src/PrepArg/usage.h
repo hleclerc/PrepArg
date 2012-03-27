@@ -24,6 +24,16 @@ static int _preparg_streq_u2m( const char *v, const char *l ) {
     }
 }
 
+static bool _preparg_atoi( int &res, const char *v ) {
+    res = 0;
+    for( int i = 0; v[ i ]; ++i ) {
+        if ( v[ i ] < '0' or v[ i ] > '9' )
+            return false;
+        res = 10 * res + ( v[ i ] - '0' );
+    }
+    return true;
+}
+
 static void usage( const char *prg ) {
     PREPARG_DISP_S( "Usage: '" );
     PREPARG_DISP_S( prg );
@@ -32,6 +42,7 @@ static void usage( const char *prg ) {
     // EARG
     #define SARG( SHORT, VAR, HELP, DEFAULT_VALUE )
     #define BARG( SHORT, VAR, HELP, DEFAULT_VALUE )
+    #define IARG( SHORT, VAR, HELP, DEFAULT_VALUE )
     #define EARG( VAR, HELP ) PREPARG_DISP_S( " " HELP );
     #define DESCRIPTION( STR )
     #include PREPARG_FILE
@@ -50,6 +61,15 @@ static void usage( const char *prg ) {
         PREPARG_DISP_S( "\n" )
 
     #define BARG( SHORT, VAR, HELP, DEFAULT_VALUE ) \
+        PREPARG_DISP_S( "  -" ); \
+        PREPARG_DISP_C( SHORT ); \
+        PREPARG_DISP_S( " or --" ); \
+        _preparg_dispu( #VAR ); \
+        PREPARG_DISP_S( ": " ); \
+        PREPARG_DISP_S( HELP ); \
+        PREPARG_DISP_S( "\n" )
+
+    #define IARG( SHORT, VAR, HELP, DEFAULT_VALUE ) \
         PREPARG_DISP_S( "  -" ); \
         PREPARG_DISP_C( SHORT ); \
         PREPARG_DISP_S( " or --" ); \

@@ -27,6 +27,10 @@ BARG( 'b', my_boolean, "A boolean", false );
 
 `BARG` means boolean argument (a flag).
 
+`IARG` means integer argument (with corresponding checks).
+
+`EARG` means final argument. If used, it is an integer (-1 by default) that describes the first non managed argument.
+
 Arguments of `SARG()`, `BARG()`, ... are:
 
 * char for single letter options (-s, -b, ...). as specified by the gnu conventions, multiple options (specified with the single char versions) may follow a hyphen delimiter in a single token if the options do not take arguments. Thus, ‘-abc’ is equivalent to ‘-a -b -c’.

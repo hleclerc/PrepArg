@@ -6,6 +6,10 @@
 #undef BARG
 #endif
 
+#ifdef IARG
+#undef IARG
+#endif
+
 #ifdef EARG
 #undef EARG
 #endif

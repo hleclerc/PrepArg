@@ -10,8 +10,12 @@
 #define PREPARG_DISP_C( S ) printf( "%c", S );
 #endif
 
-#ifndef PREPARG_
-#define PREPARG_DISP_B( S ) printf( "%i", S );
+#ifndef PREPARG_DISP_I
+#define PREPARG_DISP_I( S ) printf( "%i", S );
+#endif
+
+#ifndef PREPARG_DISP_B
+#define PREPARG_DISP_B( S ) PREPARG_DISP_I( S )
 #endif
 
 #ifndef PREPARG_S
