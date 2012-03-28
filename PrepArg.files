@@ -12,3 +12,4 @@ README.md
 src/PrepArg/attributes.h
 src/PrepArg/constructor.h
 tests/test_class.cpp
+src/PrepArg/default_values_stl.h

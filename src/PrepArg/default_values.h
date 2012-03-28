@@ -3,7 +3,7 @@
 
 
 #ifndef PREPARG_DISP_S
-#define PREPARG_DISP_S( S ) printf( "%s", S );
+#define PREPARG_DISP_S( S ) printf( "%s", ( S ) ? ( S ) : "" );
 #endif
 
 #ifndef PREPARG_DISP_C
@@ -59,7 +59,7 @@
 #endif
 
 #ifndef PREPARG_SET_B
-#define PREPARG_SET_B( VAR ) PREPARG_GET_SET_PREFIX VAR = 1;
+#define PREPARG_SET_B( VAR, VAL ) PREPARG_GET_SET_PREFIX VAR = VAL;
 #endif
 
 #ifndef PREPARG_SET_I

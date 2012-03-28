@@ -52,27 +52,41 @@ static void usage( const char *prg ) {
 
     // options
     #define SARG( SHORT, VAR, HELP, DEFAULT_VALUE ) \
-        PREPARG_DISP_S( "  -" ); \
-        PREPARG_DISP_C( SHORT ); \
-        PREPARG_DISP_S( " or --" ); \
+        PREPARG_DISP_S( "  " ); \
+        if ( SHORT ) { \
+            PREPARG_DISP_S( "-" ); \
+            PREPARG_DISP_C( SHORT ); \
+            PREPARG_DISP_S( " or " ); \
+        } \
+        PREPARG_DISP_S( "--" ); \
         _preparg_dispu( #VAR ); \
         PREPARG_DISP_S( " arg: " ); \
         PREPARG_DISP_S( HELP ); \
-        PREPARG_DISP_S( "\n" )
+        PREPARG_DISP_S( " (default='" ); \
+        PREPARG_DISP_S( DEFAULT_VALUE ); \
+        PREPARG_DISP_S( "')\n" )
 
     #define BARG( SHORT, VAR, HELP, DEFAULT_VALUE ) \
-        PREPARG_DISP_S( "  -" ); \
-        PREPARG_DISP_C( SHORT ); \
-        PREPARG_DISP_S( " or --" ); \
+        PREPARG_DISP_S( "  " ); \
+        if ( SHORT ) { \
+            PREPARG_DISP_S( "-" ); \
+            PREPARG_DISP_C( SHORT ); \
+            PREPARG_DISP_S( " or " ); \
+        } \
+        PREPARG_DISP_S( "--" ); \
         _preparg_dispu( #VAR ); \
         PREPARG_DISP_S( ": " ); \
         PREPARG_DISP_S( HELP ); \
         PREPARG_DISP_S( "\n" )
 
     #define IARG( SHORT, VAR, HELP, DEFAULT_VALUE ) \
-        PREPARG_DISP_S( "  -" ); \
-        PREPARG_DISP_C( SHORT ); \
-        PREPARG_DISP_S( " or --" ); \
+        PREPARG_DISP_S( "  " ); \
+        if ( SHORT ) { \
+            PREPARG_DISP_S( "-" ); \
+            PREPARG_DISP_C( SHORT ); \
+            PREPARG_DISP_S( " or " ); \
+        } \
+        PREPARG_DISP_S( "--" ); \
         _preparg_dispu( #VAR ); \
         PREPARG_DISP_S( ": " ); \
         PREPARG_DISP_S( HELP ); \

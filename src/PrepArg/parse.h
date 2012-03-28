@@ -23,7 +23,7 @@ for( int _preparg_num_arg = 1; _preparg_num_arg < PREPARG_ARGC; ++_preparg_num_a
                 }
             #define BARG( SHORT, VAR, HELP, DEFAULT_VALUE ) \
                 if ( PREPARG_STREQ_U2M( _preparg_arg + 2, #VAR ) ) { \
-                    PREPARG_SET_B( VAR ); \
+                    PREPARG_SET_B( VAR, not DEFAULT_VALUE ); \
                     continue; \
                 }
             #define IARG( SHORT, VAR, HELP, DEFAULT_VALUE ) \
@@ -58,7 +58,7 @@ for( int _preparg_num_arg = 1; _preparg_num_arg < PREPARG_ARGC; ++_preparg_num_a
             #define SARG( SHORT, VAR, HELP, DEFAULT_VALUE )
             #define BARG( SHORT, VAR, HELP, DEFAULT_VALUE ) \
                 if ( SHORT and _preparg_arg[ _preparg_num_ch ] == SHORT ) { \
-                    PREPARG_SET_B( VAR ); \
+                    PREPARG_SET_B( VAR, not DEFAULT_VALUE ); \
                     has_flag = true; \
                     continue; \
                 }
