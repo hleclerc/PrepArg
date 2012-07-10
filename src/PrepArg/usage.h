@@ -43,7 +43,7 @@ static void usage( const char *prg ) {
     #define SARG( SHORT, VAR, HELP, DEFAULT_VALUE )
     #define BARG( SHORT, VAR, HELP, DEFAULT_VALUE )
     #define IARG( SHORT, VAR, HELP, DEFAULT_VALUE )
-    #define EARG( VAR, HELP ) PREPARG_DISP_S( " " HELP );
+    #define EARG( VAR, HELP ) PREPARG_DISP_S( " [" HELP "]" );
     #define DESCRIPTION( STR )
     #include PREPARG_FILE
     #include "undefs.h"

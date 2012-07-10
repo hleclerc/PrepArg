@@ -21,6 +21,7 @@ DESCRIPTION( "test prg" );
 
 SARG( 's', my_string , "A string" , "default value" );
 BARG( 'b', my_boolean, "A boolean", false );
+EARG( an_integer, "help message" );
 ```
 
 `SARG` means *string argument* (by default a `const char *`).
@@ -57,7 +58,7 @@ int main( int argc, char **argv ) {
     // for loop that will parse the arguments of main
     #include <PrepArg/parse.h>
 
-    // helper that will display the arguments names, and their values
+    // helper that will display the arguments names, and their values (e.g. for a verbose mode)
     #include <PrepArg/info.h>
 
     // obviously, results can be used directly
@@ -86,6 +87,6 @@ Some configurations issues can also be managed using specific `.h` files, as e.g
 
 # And now ?
 
-This code is under the LGPLv3 license, so... feel free to use it
+This code is under the LGPLv3 license.
 
-If you want to add new functionnalities, you are very welcome !
+New functionnalities are very welcome !
