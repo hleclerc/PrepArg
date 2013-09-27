@@ -30,6 +30,8 @@ EARG( an_integer, "help message" );
 
 `IARG` means integer argument (with corresponding checks).
 
+`DARG` means floating point argument (double by default, with corresponding checks).
+
 `EARG` means final argument. If used, it is an integer (-1 by default) that describes the first non managed argument.
 
 Arguments of `SARG()`, `BARG()`, ... are:
