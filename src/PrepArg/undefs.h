@@ -30,6 +30,10 @@
 #undef IARG
 #endif
 
+#ifdef DARG
+#undef DARG
+#endif
+
 #ifdef EARG
 #undef EARG
 #endif

@@ -61,6 +61,21 @@ for( int _preparg_num_arg = 1; _preparg_num_arg < PREPARG_ARGC; ++_preparg_num_a
                     PREPARG_SET_S( VAR, tmp ); \
                     continue; \
                 }
+            #define DARG( SHORT, VAR, HELP, DEFAULT_VALUE ) \
+                if ( PREPARG_STREQ_U2M( _preparg_arg + 2, #VAR ) ) { \
+                    double tmp; \
+                    if ( _preparg_num_arg + 1 >= PREPARG_ARGC or not _preparg_atof( tmp, PREPARG_ARGV[ ++_preparg_num_arg ] ) ) { \
+                        PREPARG_DISP_S( "Error: " ); \
+                        PREPARG_DISP_C( SHORT ); \
+                        PREPARG_DISP_S( " or --" ); \
+                        _preparg_dispu( #VAR ); \
+                        PREPARG_DISP_S( " must be followed by an floating point number.\n\n" ); \
+                        PREPARG_ERROR( PREPARG_PRG_NAME ); \
+                        return __LINE__; \
+                    } \
+                    PREPARG_SET_S( VAR, tmp ); \
+                    continue; \
+                }
             #define EARG( VAR, HELP )
             #define DESCRIPTION( TXT )
             #include PREPARG_FILE
@@ -83,6 +98,7 @@ for( int _preparg_num_arg = 1; _preparg_num_arg < PREPARG_ARGC; ++_preparg_num_a
                     continue; \
                 }
             #define IARG( SHORT, VAR, HELP, DEFAULT_VALUE )
+            #define DARG( SHORT, VAR, HELP, DEFAULT_VALUE )
             #define EARG( VAR, HELP )
             #define DESCRIPTION( TXT )
             #include PREPARG_FILE
@@ -129,6 +145,23 @@ for( int _preparg_num_arg = 1; _preparg_num_arg < PREPARG_ARGC; ++_preparg_num_a
                 PREPARG_SET_I( VAR, tmp ); \
                 continue; \
             }
+        #define DARG( SHORT, VAR, HELP, DEFAULT_VALUE ) \
+            if ( _preparg_arg[ 1 ] == SHORT ) { \
+                double tmp; \
+                if ( _preparg_arg[ 2 ] == 0 ? \
+                        ++_preparg_num_arg >= PREPARG_ARGC or not _preparg_atof( tmp, PREPARG_ARGV[ _preparg_num_arg ] ) : \
+                        not _preparg_atof( tmp, _preparg_arg + 2 ) ) { \
+                    PREPARG_DISP_S( "Error: " ); \
+                    PREPARG_DISP_C( SHORT ); \
+                    PREPARG_DISP_S( " or --" ); \
+                    _preparg_dispu( #VAR ); \
+                    PREPARG_DISP_S( " must be followed by an integer.\n\n" ); \
+                    PREPARG_ERROR( PREPARG_PRG_NAME ); \
+                    return __LINE__; \
+                } \
+                PREPARG_SET_I( VAR, tmp ); \
+                continue; \
+            }
         #define EARG( VAR, HELP )
         #define DESCRIPTION( TXT )
         #include PREPARG_FILE
@@ -144,6 +177,7 @@ for( int _preparg_num_arg = 1; _preparg_num_arg < PREPARG_ARGC; ++_preparg_num_a
     #define SARG( SHORT, VAR, HELP, DEFAULT_VALUE )
     #define BARG( SHORT, VAR, HELP, DEFAULT_VALUE )
     #define IARG( SHORT, VAR, HELP, DEFAULT_VALUE )
+    #define DARG( SHORT, VAR, HELP, DEFAULT_VALUE )
     #define EARG( VAR, HELP ) PREPARG_SET_I( VAR, _preparg_num_arg ); break
     #define DESCRIPTION( TXT )
     #include PREPARG_FILE

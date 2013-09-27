@@ -45,6 +45,11 @@ static int _preparg_streq_u2m( const char *v, const char *l ) {
 }
 
 static bool _preparg_atoi( int &res, const char *v ) {
+    if ( v[ 0 ] == '-' ) {
+        bool r = _preparg_atoi( res, v + 1 );
+        res = -res;
+        return r;
+    }
     res = 0;
     for( int i = 0; v[ i ]; ++i ) {
         if ( v[ i ] < '0' or v[ i ] > '9' )
@@ -54,7 +59,50 @@ static bool _preparg_atoi( int &res, const char *v ) {
     return true;
 }
 
-static void usage( const char *prg ) {
+static bool _preparg_atof( double &res, const char *v ) {
+    if ( v[ 0 ] == '-' ) {
+        bool r = _preparg_atof( res, v + 1 );
+        res = -res;
+        return r;
+    }
+    res = 0;
+    for( int i = 0; v[ i ]; ++i ) {
+        if ( v[ i ] < '0' or v[ i ] > '9' ) {
+            if ( v[ i ] == '.' ) {
+                double d = 0.1;
+                for( ++i; v[ i ]; ++i, d /= 10 ) {
+                    if ( v[ i ] < '0' or v[ i ] > '9' ) {
+                        if ( v[ i ] == 'e' ) {
+                            int expo;
+                            if ( not  _preparg_atoi( expo, v + i + 1 ) )
+                                return false;
+                            res *= pow( 10, expo );
+                            return true;
+                        }
+                        return false;
+                    }
+                    res += d * ( v[ i ] - '0' );
+                }
+                return true;
+            }
+            if ( v[ i ] == 'e' ) {
+                int expo;
+                if ( not  _preparg_atoi( expo, v + i + 1 ) )
+                    return false;
+                res *= pow( 10, expo );
+                return true;
+            }
+            return false;
+        }
+        res = 10 * res + ( v[ i ] - '0' );
+    }
+    return true;
+}
+static int usage( const char *prg, const char *msg = 0, int ret = 0 ) {
+    if ( msg ) {
+        PREPARG_DISP_S( msg );
+        PREPARG_DISP_S( "\n" );
+    }
     PREPARG_DISP_S( "Usage: '" );
     PREPARG_DISP_S( prg );
     PREPARG_DISP_S( "' [options]" );
@@ -63,6 +111,7 @@ static void usage( const char *prg ) {
     #define SARG( SHORT, VAR, HELP, DEFAULT_VALUE )
     #define BARG( SHORT, VAR, HELP, DEFAULT_VALUE )
     #define IARG( SHORT, VAR, HELP, DEFAULT_VALUE )
+    #define DARG( SHORT, VAR, HELP, DEFAULT_VALUE )
     #define EARG( VAR, HELP ) PREPARG_DISP_S( " [" HELP "]" );
     #define DESCRIPTION( STR )
     #include PREPARG_FILE
@@ -112,6 +161,19 @@ static void usage( const char *prg ) {
         PREPARG_DISP_S( HELP ); \
         PREPARG_DISP_S( "\n" )
 
+    #define DARG( SHORT, VAR, HELP, DEFAULT_VALUE ) \
+        PREPARG_DISP_S( "  " ); \
+        if ( SHORT ) { \
+            PREPARG_DISP_S( "-" ); \
+            PREPARG_DISP_C( SHORT ); \
+            PREPARG_DISP_S( " or " ); \
+        } \
+        PREPARG_DISP_S( "--" ); \
+        _preparg_dispu( #VAR ); \
+        PREPARG_DISP_S( ": " ); \
+        PREPARG_DISP_S( HELP ); \
+        PREPARG_DISP_S( "\n" )
+
     #define EARG( VAR, HELP )
 
     #define DESCRIPTION( STR ) \
@@ -120,4 +182,6 @@ static void usage( const char *prg ) {
 
     #include PREPARG_FILE
     #include "undefs.h"
+
+    return ret;
 }

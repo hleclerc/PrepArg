@@ -50,6 +50,10 @@
 #define PREPARG_I( A ) int A
 #endif
 
+#ifndef PREPARG_D
+#define PREPARG_D( A ) double A
+#endif
+
 #ifndef PREPARG_S_D
 #define PREPARG_S_D( A, DEFAULT_VALUE ) PREPARG_S( A ) = DEFAULT_VALUE
 #endif
@@ -60,6 +64,10 @@
 
 #ifndef PREPARG_I_D
 #define PREPARG_I_D( A, DEFAULT_VALUE ) PREPARG_I( A ) = DEFAULT_VALUE
+#endif
+
+#ifndef PREPARG_D_D
+#define PREPARG_D_D( A, DEFAULT_VALUE ) PREPARG_D( A ) = DEFAULT_VALUE
 #endif
 
 #ifndef PREPARG_ARGC
