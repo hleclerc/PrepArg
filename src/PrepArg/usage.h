@@ -20,6 +20,7 @@
 
 #ifndef PREPARG_DO_NOT_WANT_STDIO_H
 #include <stdio.h>
+#include <math.h>
 #endif
 
 // load STRCMP, ... if not done
